@@ -1,9 +1,12 @@
 // ==UserScript==
-// @name        Diaspora AutoUpdater (Wai-Modus)
-// @namespace   Mein eigener
-// @description Aktualisiert automatisch die angezeigte Timeline.
-// @include     https://pod.geraspora.de/stream
-// @version     1
+// @name			Diaspora AutoUpdater (Wai-Modus)
+// @version			1.0.0
+// @namespace		Mein eigener
+// @updateURL		https://github.com/Faldrian/diasporaAutoUpdater/raw/master/src/Diaspora_AutoUpdater_(Wai-Modus).user.js
+// @downloadURL		https://github.com/Faldrian/diasporaAutoUpdater/raw/master/src/Diaspora_AutoUpdater_(Wai-Modus).user.js
+// @description		Aktualisiert automatisch die angezeigte Timeline.
+// @include			https://pod.geraspora.de/stream
+
 // ==/UserScript==
 
 
