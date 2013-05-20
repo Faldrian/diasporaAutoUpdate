@@ -1,12 +1,9 @@
 // ==UserScript==
-// @name			Diaspora AutoUpdater (Wai-Modus)
-// @version			1.0.0
-// @namespace		Mein eigener
-// @updateURL		https://github.com/Faldrian/diasporaAutoUpdater/raw/master/src/Diaspora_AutoUpdater_(Wai-Modus).user.js
-// @downloadURL		https://github.com/Faldrian/diasporaAutoUpdater/raw/master/src/Diaspora_AutoUpdater_(Wai-Modus).user.js
-// @description		Aktualisiert automatisch die angezeigte Timeline.
-// @include			https://pod.geraspora.de/stream
-
+// @name        Diaspora AutoUpdater (Wai-Modus)
+// @namespace   Mein eigener
+// @description Aktualisiert automatisch die angezeigte Timeline.
+// @include     https://pod.geraspora.de/stream
+// @version     1.1
 // ==/UserScript==
 
 
@@ -34,7 +31,7 @@ window.d_autoupdater.setup = function() {
 	window.app.stream.autoupdate = function() {
 		// Merk dir das letzte angezeigte Element, bevor neue Beiträge geladen werden.
 		if(window.d_autoupdater.latest_entry == null) {
-			window.d_autoupdater.latest_entry = $('#main_stream div div:first');
+			window.d_autoupdater.latest_entry = $('#main_stream > div > div:not(.post_preview)').first();
 		}
 		
 		// Hole neue Beiträge und render sie
@@ -48,13 +45,26 @@ window.d_autoupdater.setup = function() {
 		setTimeout(function() {
 			if(window.d_autoupdater.latest_entry != null) {
 				// Verstecke alle neu geladenen Beiträge
-				window.d_autoupdater.latest_entry.prevAll().css('display','none');
-				var newPostCount = window.d_autoupdater.latest_entry.prevAll().length;
+				var newPostCount = 0;
+				var AvatarUrl = $('#user_menu li:nth-child(2) > a').attr('href');
+				window.d_autoupdater.latest_entry.prevAll(':not(.post_preview)').each(function(index, element) {
+					var postAvatarUrl = $(element).children().children().first().attr('href');
+					// Checken, ob das dein eigener Post ist
+					if(AvatarUrl != postAvatarUrl) {
+						$(element).css('display','none');
+						newPostCount = newPostCount + 1;
+					}
+				});
+				
+				// Preview wieder nach oben einschieben, damit die neuen Posts drunter stehen.
+				$('#main_stream > div').prepend($('#main_stream > div > div.post_preview'));
 				
 				if(newPostCount > 0) { // Nur wenn es neue Beiträge gibt, den Button überhaupt anzeigen
 					// Knopf einfügen, der das Anzeigen der Beiträge erlaubt. Vorher alten Knopf löschen.
 					$('#main_stream_refresh_button').remove();
-					$('#main_stream').prepend('<div id="main_stream_refresh_button" style="border: 1px solid #3f8fba; background-color: #cae2ef; padding: 6px; text-align:center;">' + newPostCount + ' new Posts</div>');
+					// Knopf muss VOR die Einträge, aber NACH der Preview eingefügt werden!
+					window.d_autoupdater.latest_entry.before('<div id="main_stream_refresh_button" style="margin-top:15px; border: 1px solid #3f8fba; background-color: #cae2ef; padding: 6px; text-align:center;">' + newPostCount + ' new Posts</div>');
+					
 					$('#main_stream_refresh_button').click(function() {
 						window.d_autoupdater.latest_entry.prevAll().css('display',''); // Alte Beiträge anzeigen
 						window.d_autoupdater.latest_entry.css('border-top', '1px solid #3f8fba'); // Balken drantun, damit man weiß, ab wann es neu ist.
@@ -76,7 +86,7 @@ window.d_autoupdater.setup = function() {
 				
 				console.log("AutoUpdater cycle finished.");
 			}
-			}, 50); // EKLIG! Aber es gibt aktuell kein Event, was getriggert wird, wenn die Beiträge gerendert sind.
+			}, 50); // EKLIG! Aber es gibt aktuell kein Event, was getriggert wird, wenn die Beiträge gerendert sind. Update: Immer noch eklig.
 			
 		});
 	
