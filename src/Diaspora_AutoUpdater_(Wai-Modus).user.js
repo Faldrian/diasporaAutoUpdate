@@ -2,10 +2,11 @@
 // @name        Diaspora AutoUpdater (Wai-Modus)
 // @namespace   Mein eigener
 // @description Aktualisiert automatisch die angezeigte Timeline.
-// @include     https://pod.geraspora.de/stream
+// @include     https://*/stream
+// @grant		none
 // @downloadURL	https://github.com/Faldrian/diasporaAutoUpdate/raw/master/src/Diaspora_AutoUpdater_(Wai-Modus).user.js
 // @updateURL	https://github.com/Faldrian/diasporaAutoUpdate/raw/master/src/Diaspora_AutoUpdater_(Wai-Modus).user.js
-// @version     1.1.1
+// @version     1.1.2
 // ==/UserScript==
 
 
@@ -102,7 +103,19 @@ setTimeout(window.d_autoupdater.setup, 2000); // Ein bisschen warten, bis wir un
 } // end of wrapper
 
 
-// inject code into site context
-var script = document.createElement('script');
-script.appendChild(document.createTextNode('('+ wrapper +')();'));
-(document.body || document.head || document.documentElement).appendChild(script);
+// Check if the page is a Diaspora-Pod (all Pods have a meta-element with "Diaspora*" as content)
+var isValidPod = false;
+var meta_elements = window.document.getElementsByTagName('meta');
+for(key in meta_elements) {
+	if(meta_elements[key].getAttribute("content") == 'Diaspora*') {
+		isValidPod = true;
+		break;
+	}
+}
+
+if(isValidPod) {
+	// inject code into site context
+	var script = document.createElement('script');
+	script.appendChild(document.createTextNode('('+ wrapper +')();'));
+	(document.body || document.head || document.documentElement).appendChild(script);
+}
