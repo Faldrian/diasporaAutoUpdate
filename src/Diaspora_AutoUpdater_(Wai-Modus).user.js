@@ -3,7 +3,9 @@
 // @namespace   Mein eigener
 // @description Aktualisiert automatisch die angezeigte Timeline.
 // @include     https://pod.geraspora.de/stream
-// @version     1.1
+// @downloadURL	https://github.com/Faldrian/diasporaAutoUpdate/raw/master/src/Diaspora_AutoUpdater_(Wai-Modus).user.js
+// @updateURL	https://github.com/Faldrian/diasporaAutoUpdate/raw/master/src/Diaspora_AutoUpdater_(Wai-Modus).user.js
+// @version     1.1.1
 // ==/UserScript==
 
 
@@ -47,7 +49,8 @@ window.d_autoupdater.setup = function() {
 				// Verstecke alle neu geladenen Beiträge
 				var newPostCount = 0;
 				var AvatarUrl = $('#user_menu li:nth-child(2) > a').attr('href');
-				window.d_autoupdater.latest_entry.prevAll(':not(.post_preview)').each(function(index, element) {
+				// Alle Beiträge, die neu sind und nicht unser Button sind und auch nicht die PostPreview.
+				window.d_autoupdater.latest_entry.prevAll(':not(.post_preview)').not('#main_stream_refresh_button').each(function(index, element) {
 					var postAvatarUrl = $(element).children().children().first().attr('href');
 					// Checken, ob das dein eigener Post ist
 					if(AvatarUrl != postAvatarUrl) {
