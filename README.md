@@ -9,6 +9,11 @@ Install Greasemonkey and [click here](https://github.com/Faldrian/diasporaAutoUp
 Changelog
 ---------
 
+27.08.2013  
+**1.2.0**
+
+* Bugfix: Diaspora changed it's brandname, so the pod-detection-code had to adopt this change.
+
 21.05.2013  
 **1.1.2**
 

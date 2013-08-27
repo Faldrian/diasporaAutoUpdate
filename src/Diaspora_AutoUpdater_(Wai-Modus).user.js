@@ -6,7 +6,7 @@
 // @grant		none
 // @downloadURL	https://github.com/Faldrian/diasporaAutoUpdate/raw/master/src/Diaspora_AutoUpdater_(Wai-Modus).user.js
 // @updateURL	https://github.com/Faldrian/diasporaAutoUpdate/raw/master/src/Diaspora_AutoUpdater_(Wai-Modus).user.js
-// @version     1.1.2
+// @version     1.2.0
 // ==/UserScript==
 
 
