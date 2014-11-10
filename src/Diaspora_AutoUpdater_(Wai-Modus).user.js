@@ -67,7 +67,12 @@ window.d_autoupdater.setup = function() {
 					// Insert "show hidden posts"-Button. Remove old instance, if any.
 					$('#main_stream_refresh_button').remove();
 					// The Button has to be inserted ON TOP of the entries, but BELOW the preview-area!
-					window.d_autoupdater.latest_entry.before('<div id="main_stream_refresh_button" style="margin-top:15px; border: 1px solid #3f8fba; background-color: #cae2ef; padding: 6px; text-align:center;">' + newPostCount + ' new Posts</div>');
+					if(newPostCount === 1) {
+                        			messageString="new post";
+        					} else {
+                        			messageString="new posts";
+                			}
+					window.d_autoupdater.latest_entry.before('<div id="main_stream_refresh_button" style="margin-top:15px; border: 1px solid #3f8fba; background-color: #cae2ef; padding: 6px; text-align:center;">' + newPostCount +' '+messageString+'</div>');
 					
 					$('#main_stream_refresh_button').click(function() {
 						window.d_autoupdater.latest_entry.prevAll().css('display',''); // Show old entries
