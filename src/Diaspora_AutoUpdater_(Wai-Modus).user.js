@@ -6,7 +6,7 @@
 // @grant   none
 // @downloadURL https://github.com/Faldrian/diasporaAutoUpdate/raw/master/src/Diaspora_AutoUpdater_(Wai-Modus).user.js
 // @updateURL https://github.com/Faldrian/diasporaAutoUpdate/raw/master/src/Diaspora_AutoUpdater_(Wai-Modus).user.js
-// @version     1.2.2
+// @version     1.2.3
 // ==/UserScript==
 
 
@@ -67,7 +67,7 @@ window.d_autoupdater.setup = function() {
           // Insert "show hidden posts"-Button. Remove old instance, if any.
           $('#main_stream_refresh_button').remove();
           // The Button has to be inserted ON TOP of the entries, but BELOW the preview-area!
-          messageString = (newPostCount == 1) ? "new post" : "new posts";
+          var messageString = (newPostCount == 1) ? "new post" : "new posts";
           window.d_autoupdater.latest_entry.before('<div id="main_stream_refresh_button" style="margin-top:15px; border: 1px solid #3f8fba; background-color: #cae2ef; padding: 6px; text-align:center;">' + newPostCount +' '+messageString+'</div>');
           
           $('#main_stream_refresh_button').click(function() {
@@ -91,9 +91,9 @@ window.d_autoupdater.setup = function() {
         
         console.log("AutoUpdater cycle finished.");
       }
-      }, 50); // The whole thing is wrapped in a timeout. NOT ELEGANT. But we need to fire AFTER backbone.js has finished updating models and rendering the posts, so we can hide them again.
-      
-    });
+    }, 50); // The whole thing is wrapped in a timeout. NOT ELEGANT. But we need to fire AFTER backbone.js has finished updating models and rendering the posts, so we can hide them again.
+    
+  });
   
   setInterval(window.app.stream.autoupdate, 90*1000); // 1.5 minutes interval
   console.log("AutoUpdater installed, timer started.");
