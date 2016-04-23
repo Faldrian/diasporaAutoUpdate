@@ -1,4 +1,4 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name        Diaspora AutoUpdater (Wai-Modus)
 // @namespace   my own
 // @description Automatically updates the currently shown stream.
@@ -6,7 +6,7 @@
 // @grant   none
 // @downloadURL https://github.com/Faldrian/diasporaAutoUpdate/raw/master/src/Diaspora_AutoUpdater_(Wai-Modus).user.js
 // @updateURL https://github.com/Faldrian/diasporaAutoUpdate/raw/master/src/Diaspora_AutoUpdater_(Wai-Modus).user.js
-// @version     1.2.3
+// @version     1.3.0
 // ==/UserScript==
 
 
@@ -68,11 +68,11 @@ window.d_autoupdater.setup = function() {
           $('#main_stream_refresh_button').remove();
           // The Button has to be inserted ON TOP of the entries, but BELOW the preview-area!
           var messageString = (newPostCount == 1) ? "new post" : "new posts";
-          window.d_autoupdater.latest_entry.before('<div id="main_stream_refresh_button" style="margin-top:15px; border: 1px solid #3f8fba; background-color: #cae2ef; padding: 6px; text-align:center;">' + newPostCount +' '+messageString+'</div>');
+          window.d_autoupdater.latest_entry.before('<div id="main_stream_refresh_button" class="stream_element" style="border: 1px solid #3f8fba; background-color: #cae2ef; text-align:center;">' + newPostCount +' '+messageString+'</div>');
           
           $('#main_stream_refresh_button').click(function() {
             window.d_autoupdater.latest_entry.prevAll().css('display',''); // Show old entries
-            window.d_autoupdater.latest_entry.css('border-top', '1px solid #3f8fba'); // Add horizontal bar to mark the position where new entries start
+            window.d_autoupdater.latest_entry.css('border-top', '2px solid #3f8fba'); // Add horizontal bar to mark the position where new entries start
             if(window.d_autoupdater.last_marked_entry != null) {
               window.d_autoupdater.last_marked_entry.css('border-top',''); // Remote horizontal bar from old position
             }
