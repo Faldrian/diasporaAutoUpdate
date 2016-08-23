@@ -1,4 +1,4 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name        Diaspora AutoUpdater (Wai-Modus)
 // @namespace   my own
 // @description Automatically updates the currently shown stream.
@@ -104,17 +104,8 @@ setTimeout(window.d_autoupdater.setup, 2000); // Wait for javascript / backbone.
 } // end of wrapper
 
 
-// Check if the page is a Diaspora-Pod (all Pods have a meta-element with "Diaspora*" as content)
-var isValidPod = false;
-var meta_elements = window.document.getElementsByTagName('meta');
-for(key in meta_elements) {
-  if(meta_elements[key].getAttribute("content") == 'diaspora*') {
-    isValidPod = true;
-    break;
-  }
-}
-
-if(isValidPod) {
+// Check if the page is a Diaspora-Pod (all Pods have a Diaspora object)
+if(typeof(Diaspora) !== 'undefined') {
   // inject code into site context
   var script = document.createElement('script');
   script.appendChild(document.createTextNode('('+ wrapper +')();'));
