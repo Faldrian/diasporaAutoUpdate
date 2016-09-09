@@ -9,10 +9,16 @@ Install Greasemonkey and [click here](https://github.com/Faldrian/diasporaAutoUp
 Changelog
 ---------
 
+09.09.2016  
+**1.4.0**
+
+* Bugfix: Fix pod-detection for diaspora\* 0.6.0.0.
+* Refactoring: Don't inject a script-element, fixes Content Security Policy compatibility.
+
 23.04.2016  
 **1.3.0**
 
-* Design: Made use of the stream_element class, better fit to new diaspora design
+* Design: Made use of the stream\_element class, better fit to new diaspora design.
 
 27.08.2013  
 **1.2.0**
@@ -22,7 +28,7 @@ Changelog
 21.05.2013  
 **1.1.2**
 
-* Feature: The Scripts now applies to all Pods (@include changed) and checks whether the embedding site is a Diaspora* instance by checking meta-elements before injecting code.
+* Feature: The Scripts now applies to all Pods (@include changed) and checks whether the embedding site is a diaspora\* instance by checking meta-elements before injecting code.
 
 **1.1.1**
 
