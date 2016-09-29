@@ -9,6 +9,11 @@ Install Greasemonkey and [click here](https://github.com/Faldrian/diasporaAutoUp
 Changelog
 ---------
 
+28.09.2016
+**1.4.1**
+
+* Bugfix: Add `stream-element` class for diaspora\* 0.6.1.0.
+
 09.09.2016  
 **1.4.0**
 
