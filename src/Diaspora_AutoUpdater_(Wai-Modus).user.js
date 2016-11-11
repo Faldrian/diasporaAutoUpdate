@@ -19,6 +19,12 @@
     window.d_autoupdater.last_marked_entry = null;
     window.d_autoupdater.title = document.title;
 
+    let hiddenDiv = document.createElement("div");
+    hiddenDiv.style.display = "none";
+    hiddenDiv.className = "bg-info";
+    document.body.appendChild(hiddenDiv);
+    window.d_autoupdater.bg_color = getComputedStyle(hiddenDiv).getPropertyValue("background-color");
+
     window.d_autoupdater.setup = function() {
       // Model - Modifications: I have to override some functions to hack into backbone.js
       window.app.stream.autoreload_on = false;
@@ -69,7 +75,7 @@
               $('#main_stream_refresh_button').remove();
               // The Button has to be inserted ON TOP of the entries, but BELOW the preview-area!
               var messageString = (newPostCount == 1) ? "new post" : "new posts";
-              window.d_autoupdater.latest_entry.before('<div id="main_stream_refresh_button" class="stream-element stream_element" style="border: 1px solid #3f8fba; background-color: #cae2ef; text-align:center;">' + newPostCount +' '+messageString+'</div>');
+              window.d_autoupdater.latest_entry.before('<div id="main_stream_refresh_button" class="stream-element stream_element" style="border: 1px solid #3f8fba; background-color: ' + window.d_autoupdater.bg_color + '; text-align:center;">' + newPostCount +' '+messageString+'</div>');
 
               $('#main_stream_refresh_button').click(function() {
                 window.d_autoupdater.latest_entry.prevAll().css('display',''); // Show old entries
